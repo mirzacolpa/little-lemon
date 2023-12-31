@@ -27,6 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DJOSER = {
+    # 'SERIALIZERS': {
+    #     'token_create': 'djoser.serializers.TokenCreateSerializer',
+    #     'token': 'djoser.serializers.TokenSerializer',
+    #     'token_confirm': 'djoser.serializers.TokenConfirmSerializer',
+    #     'password_reset': 'djoser.serializers.PasswordResetSerializer',
+    #     'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',
+    # },
+    'USER_ID_FIELD': 'username',  # This should match your actual user ID field
+    #'LOGIN_FIELD': 'email',  # Change to 'username' if you are using the username for login
+}
 
 # Application definition
 
@@ -39,7 +50,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurant',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # Other authentication classes may be present here
+    ],
+    # Other DRF settings...
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
